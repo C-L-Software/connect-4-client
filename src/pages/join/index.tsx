@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ArrowBackIosNew } from "@mui/icons-material";
 import FlexBox from "../../components/flex-box";
+import BackButton from "../../components/back-button";
 import {
   Button,
   Paper,
@@ -10,6 +9,7 @@ import {
   Stack,
   Typography,
   CircularProgress,
+  Divider,
 } from "@mui/material";
 
 const ERROR_TEXT = "Game Code cannot be empty!";
@@ -18,12 +18,6 @@ export default () => {
   const [gameCode, setGameCode] = useState<number | undefined>(undefined);
   const [errorText, setErrorText] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const onBack = () => {
-    navigate(-1);
-  };
 
   const onSubmit = () => {
     if (!gameCode) {
@@ -57,20 +51,13 @@ export default () => {
           <Box>
             <Stack spacing={2}>
               <Stack direction={"column"}>
-                <Stack direction={"row"}>
-                  <Button
-                    onClick={onBack}
-                    startIcon={<ArrowBackIosNew />}
-                    sx={{ m: 1 }}
-                  >
-                    Go back
-                  </Button>
-                </Stack>
+                <BackButton />
               </Stack>
             </Stack>
             <Stack direction={"column"} spacing={0.2}>
               <Box sx={{ p: 3, textAlign: "center" }}>
                 <Typography variant="h4">Join Game</Typography>
+                <Divider sx={{ mt: 1 }} />
               </Box>
               <Box sx={{ p: 3, pt: 0, width: "100%", textAlign: "center" }}>
                 <Typography>

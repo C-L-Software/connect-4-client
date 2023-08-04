@@ -11,7 +11,7 @@ export default () => {
 
   return (
     <Stack direction={"column"} spacing={2}>
-      <Button onClick={() => onClick("/game")}>
+      <Button onClick={() => onClick("/new-game")}>
         <Typography variant="h5">New Game</Typography>
       </Button>
       <Button onClick={() => onClick("/join")}>
