@@ -3,6 +3,7 @@ import GridCell from "../grid-cell";
 import FlexBox from "../../../../components/flex-box";
 import { Stack, Box } from "@mui/material";
 import { useGame } from "../../../../hooks/useGame";
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../constants";
 
 export default () => {
   const {
@@ -19,7 +20,7 @@ export default () => {
 
   return (
     <FlexBox>
-      <Box sx={{ width: "70%", height: "95%" }}>
+      <Box sx={{ width: BOARD_WIDTH, height: BOARD_HEIGHT }}>
         <Stack direction={"column"} sx={{ height: "100%", width: "100%" }}>
           {rows.map((row) => (
             <Stack direction={"row"} sx={{ height: "16%" }}>
