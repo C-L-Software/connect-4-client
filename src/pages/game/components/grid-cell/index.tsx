@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Paper } from "@mui/material";
 import { useGame } from "../../../../hooks/useGame";
+import { grey, red, blue } from "@mui/material/colors";
 
 type Props = {
   cellValue: string;
@@ -31,12 +32,12 @@ export default ({ cellValue, row, column }: Props) => {
 
   const getColorFromValue = () => {
     if (!cellValue) {
-      return "grey";
+      return grey[800];
     }
     if (cellValue === playerId) {
-      return "blue";
+      return blue[500];
     }
-    return "red";
+    return red[500];
   };
 
   return (
