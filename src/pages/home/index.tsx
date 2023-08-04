@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Typography, Box, Divider, Stack } from "@mui/material";
-import { useAnimation, motion } from "framer-motion";
+import { Box } from "@mui/material";
+import { useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Title from "./components/title";
 import Footer from "./components/footer";

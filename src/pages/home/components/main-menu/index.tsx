@@ -14,6 +14,9 @@ export default () => {
       <Button onClick={() => onClick("/game")}>
         <Typography variant="h5">New Game</Typography>
       </Button>
+      <Button onClick={() => onClick("/join")}>
+        <Typography variant="h5">Join Game</Typography>
+      </Button>
       <Button onClick={() => onClick("/about")}>
         <Typography variant="h5">About</Typography>
       </Button>
