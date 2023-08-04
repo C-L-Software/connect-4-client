@@ -25,6 +25,7 @@ export default ({ cellValue, row, column }: Props) => {
     newBoard[row][column] = playerId;
 
     // TODO: Replace this with fetch
+    // with just the column
     dispatch({ type: "UPDATE_BOARD", value: newBoard });
   };
 
