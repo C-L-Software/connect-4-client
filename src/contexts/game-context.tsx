@@ -12,7 +12,7 @@ const GameContext = createContext<
 
 const initialState: GameState = {
   hasStarted: false,
-  currentTurn: "",
+  currentTurn: "1234",
   gameBoard: [
     ["", "", "", "", "", "", ""],
     ["", "", "", "", "", "", ""],

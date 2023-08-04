@@ -10,19 +10,21 @@ type Props = {
 
 export default ({ cellValue, row, column }: Props) => {
   const {
-    state: { playerId, gameBoard },
+    state: { playerId, gameBoard, currentTurn },
     dispatch,
   } = useGame();
 
   const cellClick = () => {
     // This cell has already been taken
-    if (!!cellValue) {
+    // or, it is not our turn
+    if (!!cellValue || playerId !== currentTurn) {
       return;
     }
-    console.log("here");
+
     const newBoard = JSON.parse(JSON.stringify(gameBoard));
     newBoard[row][column] = playerId;
 
+    // TODO: Replace this with fetch
     dispatch({ type: "UPDATE_BOARD", value: newBoard });
   };
 
