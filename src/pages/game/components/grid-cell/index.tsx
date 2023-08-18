@@ -1,4 +1,5 @@
 import React from "react";
+import { GameActionType } from "../../../../types/game";
 import { Box, Paper } from "@mui/material";
 import { useGame } from "../../../../hooks/useGame";
 import { grey, red, blue } from "@mui/material/colors";
@@ -27,7 +28,7 @@ export default ({ cellValue, row, column }: Props) => {
 
     // TODO: Replace this with fetch
     // with just the column
-    dispatch({ type: "UPDATE_BOARD", value: newBoard });
+    dispatch({ type: GameActionType.UPDATE_BOARD, value: newBoard });
   };
 
   const getColorFromValue = () => {

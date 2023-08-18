@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FlexBox from "../../components/flex-box";
 import BackButton from "../../components/back-button";
+import { useGame } from "../../hooks/useGame";
 import { Paper, Box, Divider, Typography, Stack, Button } from "@mui/material";
 
 export default () => {
+  const {
+    newGame,
+    state: { joinCode },
+  } = useGame();
+
+  useEffect(() => {
+    newGame();
+  }, []);
+
   return (
     <FlexBox>
       <Paper elevation={2}>
@@ -21,7 +31,7 @@ export default () => {
                 <Box sx={{ border: "1px solid grey", p: 2 }}>
                   <Stack direction={"column"} spacing={1}>
                     <Typography>
-                      Your game code is: <b>23423423</b>
+                      Your game code is: <b>{joinCode}</b>
                     </Typography>
                     <Typography>
                       Send this game code to your opponent.

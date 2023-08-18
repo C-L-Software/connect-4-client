@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import {
   GameAction,
+  GameActionType,
   GameDispatch,
   GameProviderProps,
   GameState,
@@ -23,6 +24,9 @@ const initialState: GameState = {
   ],
   gameOver: false,
   playerId: "123",
+  hasConnected: false,
+  socket: null,
+  joinCode: "",
 };
 
 // Click a piece
@@ -30,6 +34,20 @@ const initialState: GameState = {
 
 function gameReducer(state: GameState, action: GameAction) {
   switch (action.type) {
+    case "CONNECTED": {
+      console.log("connected");
+      return {
+        ...state,
+        socket: action.value,
+        hasConnected: true,
+      };
+    }
+    case GameActionType.NEW_GAME: {
+      return {
+        ...state,
+        joinCode: action.value,
+      };
+    }
     case "START_GAME": {
       return {
         ...state,
