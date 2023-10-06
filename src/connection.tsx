@@ -5,7 +5,7 @@ import { GameActionType } from "./types/game";
 import { useGame } from "./hooks/useGame";
 import { io } from "socket.io-client";
 
-const socket = io("http://192.168.1.92:3000");
+const socket = io("http://jlemon.org:4533");
 
 type Props = {
   children: ReactNode;
