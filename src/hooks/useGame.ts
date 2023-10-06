@@ -25,8 +25,29 @@ export const useGame = () => {
     );
   };
 
+  const joinGame = async (joinCode: string) => {
+    const { socket } = state;
+    socket?.emit(SocketEvents.JOIN_GAME, { joinCode }, (err: Error | null) => {
+      if (err) {
+        // TODO: Error handling
+        return;
+      }
+    });
+  };
+
+  const dropChip = (column: number) => {
+    const { socket } = state;
+    socket?.emit(SocketEvents.DROP_CHIP, { column }, (err: Error | null) => {
+      if (err) {
+        return;
+      }
+    });
+  };
+
   return {
     ...context,
     newGame,
+    joinGame,
+    dropChip,
   };
 };

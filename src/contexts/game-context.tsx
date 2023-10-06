@@ -13,7 +13,7 @@ const GameContext = createContext<
 
 const initialState: GameState = {
   hasStarted: false,
-  currentTurn: "123",
+  turnPlayer: "123",
   gameBoard: [
     ["", "", "", "", "", "", ""],
     ["", "", "", "", "", "", ""],
@@ -27,6 +27,7 @@ const initialState: GameState = {
   hasConnected: false,
   socket: null,
   joinCode: "",
+  winner: "",
 };
 
 // Click a piece
@@ -35,10 +36,10 @@ const initialState: GameState = {
 function gameReducer(state: GameState, action: GameAction) {
   switch (action.type) {
     case "CONNECTED": {
-      console.log("connected");
       return {
         ...state,
-        socket: action.value,
+        socket: action.value.socket,
+        playerId: action.value.playerId,
         hasConnected: true,
       };
     }
@@ -46,24 +47,27 @@ function gameReducer(state: GameState, action: GameAction) {
       return {
         ...state,
         joinCode: action.value,
+        winner: "",
       };
     }
     case "START_GAME": {
       return {
         ...state,
         hasStarted: true,
+        winner: "",
       };
     }
     case "END_GAME": {
       return {
         ...state,
-        hasStarted: false,
+        winner: action.value.winner,
       };
     }
     case "UPDATE_BOARD": {
       return {
         ...state,
-        gameBoard: action.value,
+        gameBoard: action.value.gameBoard,
+        turnPlayer: action.value.turnPlayer,
       };
     }
     default: {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FlexBox from "../../components/flex-box";
 import BackButton from "../../components/back-button";
 import {
@@ -11,11 +11,20 @@ import {
   CircularProgress,
   Divider,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { GameActionType } from "../../types/game";
+import { useGame } from "../../hooks/useGame";
 
 const ERROR_TEXT = "Game Code cannot be empty!";
 
 export default () => {
-  const [gameCode, setGameCode] = useState<number | undefined>(undefined);
+  const {
+    state: { hasStarted },
+    dispatch,
+    joinGame,
+  } = useGame();
+  const navigate = useNavigate();
+  const [gameCode, setGameCode] = useState<string | undefined>(undefined);
   const [errorText, setErrorText] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,16 +33,23 @@ export default () => {
       return setErrorText(ERROR_TEXT);
     }
     setIsLoading(true);
+    joinGame(gameCode);
   };
 
   const handleGameCodeUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const asNumber = parseInt(value);
-    setGameCode(asNumber);
-    if (errorText && !isNaN(asNumber)) {
+    if (errorText && !isNaN(parseInt(value))) {
       setErrorText(undefined);
+    } else {
+      setGameCode(value);
     }
   };
+
+  useEffect(() => {
+    if (hasStarted) {
+      navigate("/game");
+    }
+  }, [hasStarted]);
 
   return (
     <FlexBox>

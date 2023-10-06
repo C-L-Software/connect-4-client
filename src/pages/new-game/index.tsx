@@ -1,18 +1,26 @@
 import React, { useEffect } from "react";
 import FlexBox from "../../components/flex-box";
 import BackButton from "../../components/back-button";
+import { useNavigate } from "react-router-dom";
 import { useGame } from "../../hooks/useGame";
 import { Paper, Box, Divider, Typography, Stack, Button } from "@mui/material";
 
 export default () => {
   const {
     newGame,
-    state: { joinCode },
+    state: { joinCode, hasStarted },
   } = useGame();
+  const navigate = useNavigate();
 
   useEffect(() => {
     newGame();
   }, []);
+
+  useEffect(() => {
+    if (hasStarted) {
+      navigate("/game");
+    }
+  }, [hasStarted]);
 
   return (
     <FlexBox>
@@ -37,20 +45,10 @@ export default () => {
                       Send this game code to your opponent.
                     </Typography>
                     <Typography>
-                      Once your opponent has joined, click the Start button
-                      below
+                      Once your opponent has joined, the game will begin
                     </Typography>
                   </Stack>
                 </Box>
-
-                <Box sx={{ mt: 2, mb: 2 }}>
-                  <Typography style={{ fontWeight: "bold" }}>
-                    Player count: 1/2
-                  </Typography>
-                </Box>
-                <Stack direction={"row"} justifyContent={"center"}>
-                  <Button variant="contained">Start</Button>
-                </Stack>
               </Box>
             </Stack>
           </Stack>

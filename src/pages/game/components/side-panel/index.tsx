@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FlexBox from "../../../../components/flex-box";
 import { Paper, Typography, Divider, Stack } from "@mui/material";
 import { useGame } from "../../../../hooks/useGame";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
+  const navigate = useNavigate();
   const {
-    state: { currentTurn, playerId },
+    state: { turnPlayer, playerId, winner },
   } = useGame();
+
+  useEffect(() => {
+    if (winner) {
+      alert(winner === playerId ? "YOU HAVE WON" : "YOU HAVE LOST");
+      navigate("/");
+    }
+  }, [winner]);
 
   return (
     <FlexBox>
@@ -23,7 +32,7 @@ export default () => {
           direction={"column"}
         >
           <Typography variant="h5">
-            {currentTurn === playerId ? "Your turn" : "Other players turn"}
+            {turnPlayer === playerId ? "Your turn" : "Other players turn"}
           </Typography>
         </Stack>
       </Paper>

@@ -12,23 +12,18 @@ type Props = {
 
 export default ({ cellValue, row, column }: Props) => {
   const {
-    state: { playerId, gameBoard, currentTurn },
-    dispatch,
+    state: { playerId, turnPlayer },
+    dropChip,
   } = useGame();
 
   const cellClick = () => {
     // This cell has already been taken
     // or, it is not our turn
-    if (!!cellValue || playerId !== currentTurn) {
+    if (!!cellValue || playerId !== turnPlayer) {
       return;
     }
 
-    const newBoard = JSON.parse(JSON.stringify(gameBoard));
-    newBoard[row][column] = playerId;
-
-    // TODO: Replace this with fetch
-    // with just the column
-    dispatch({ type: GameActionType.UPDATE_BOARD, value: newBoard });
+    dropChip(column);
   };
 
   const getColorFromValue = () => {

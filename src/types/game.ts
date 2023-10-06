@@ -4,12 +4,13 @@ import type { Socket } from "socket.io-client";
 export type GameState = {
   hasConnected: boolean;
   hasStarted: boolean;
-  currentTurn: string;
+  turnPlayer: string;
   gameBoard: Array<Array<string>>;
   playerId: string;
   gameOver: boolean;
   socket: Socket | null;
   joinCode: string;
+  winner: string;
 };
 
 export enum GameActionType {
@@ -28,6 +29,7 @@ export enum SocketEvents {
   GAME_STATE = "game_state",
   DROP_CHIP = "drop_chip",
   PLAYER_JOINED = "player_joined",
+  GAME_OVER = "game_over",
 }
 
 export type GameAction = {

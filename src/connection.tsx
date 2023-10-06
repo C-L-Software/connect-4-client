@@ -19,7 +19,29 @@ export default ({ children }: Props) => {
     // Connect to the socket
     socket.on(SocketEvents.ACK, () => {
       setLoading(false);
-      dispatch({ type: GameActionType.CONNECTED, value: socket });
+      dispatch({
+        type: GameActionType.CONNECTED,
+        value: { socket, playerId: socket.id },
+      });
+    });
+
+    // Wait for the game to start
+    socket.on(SocketEvents.START_GAME, () => {
+      dispatch({ type: GameActionType.START_GAME });
+    });
+
+    socket.on(SocketEvents.GAME_STATE, ({ gameBoard, turnPlayer }) => {
+      dispatch({
+        type: GameActionType.UPDATE_BOARD,
+        value: { gameBoard, turnPlayer },
+      });
+    });
+
+    socket.on(SocketEvents.GAME_OVER, ({ winner }: { winner: string }) => {
+      dispatch({
+        type: GameActionType.END_GAME,
+        value: { winner },
+      });
     });
   }, []);
 
