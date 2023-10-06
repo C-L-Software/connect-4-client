@@ -8,7 +8,7 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     path: __dirname + "/dist/",
-    publicPath: "/",
+    publicPath: "/projects/connect-4/dist/",
   },
   module: {
     rules: [
